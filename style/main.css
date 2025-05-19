@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'UnifrakturCook', cursive;
+  background: black;
+}
+
+#bgVideo {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+#playerMenu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.0));
+  backdrop-filter: blur(5px);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.arrow:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.arrow.left {
+  border-width: 30px 40px 30px 0;
+  border-color: transparent white transparent transparent;
+}
+
+.arrow.right {
+  border-width: 30px 0 30px 40px;
+  border-color: transparent transparent transparent white;
+}
+
+#radioLogo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.05);
+  border: 3px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+#radioLogo:hover {
+  transform: scale(1.05);
+}
+
+audio {
+  display: none;
+}
