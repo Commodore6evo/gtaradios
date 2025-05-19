@@ -1,47 +1,47 @@
 const radios = [
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/4/4b/PlaybackFM.JPG", 
-    url: "radios/gtasa/playbackfm.mp3" 
+    url: "../radios/gtasa/playbackfm.mp3" 
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/f/fa/KRose.JPG", 
-    url: "radios/gtasa/krose.mp3"
+    url: "../radios/gtasa/krose.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/c/c4/KDSTLogo.png",
-    url: "radios/gtasa/kdst.mp3"
+    url: "../radios/gtasa/kdst.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/5/59/BounceFM.JPG", 
-    url: "radios/gtasa/bouncefm.mp3"
+    url: "../radios/gtasa/bouncefm.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/f/f1/SF-UR.png",
-    url: "radios/gtasa/sf-ur.mp3"
+    url: "../radios/gtasa/sf-ur.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/2/2d/RadioLosSantos.JPG", 
-    url: "radios/gtasa/radiolos.mp3"
+    url: "../radios/gtasa/radiolos.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/2/2e/Radio_X.JPG", 
-    url: "radios/gtasa/radiox.mp3"
+    url: "../radios/gtasa/radiox.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/b/b3/CSR_103.9.jpg",
-    url: "radios/gtasa/csr.mp3"
+    url: "../radios/gtasa/csr.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/b/b9/KJahwest.JPG", 
-    url: "radios/gtasa/kjahwest.mp3"
+    url: "../radios/gtasa/kjahwest.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/4/4d/MasterSoundsLogo.png",
-    url: "radios/gtasa/mastersounds.mp3"
+    url: "../radios/gtasa/mastersounds.mp3"
   },
   {
     logo: "https://static.wikia.nocookie.net/esgta/images/f/ff/West_Coast_Talk_Radio.jpg",
-    url: "radios/gtasa/wctrc.mp3"
+    url: "../radios/gtasa/wctrc.mp3"
   }
 ];
 
