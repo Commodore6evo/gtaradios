@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GTA Radio</title>
+  <!-- Fuente estilo GTA -->
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'UnifrakturCook', cursive;
+      background: black;
+    }
+
+    #bgVideo {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #playerMenu {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.0));
+      backdrop-filter: blur(5px);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
+    }
+
+    .arrow {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: transform 0.2s ease;
+    }
+
+    .arrow:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    .arrow.left {
+      border-width: 30px 40px 30px 0;
+      border-color: transparent white transparent transparent;
+    }
+
+    .arrow.right {
+      border-width: 30px 0 30px 40px;
+      border-color: transparent transparent transparent white;
+    }
+
+    #radioLogo {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      background: rgba(255,255,255,0.05);
+      border: 3px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      padding: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    #radioLogo:hover {
+      transform: scale(1.05);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body onclick="ensurePlay()">
+
+  <!-- Video de fondo -->
+  <video id="bgVideo" autoplay loop muted>
+    <source src="video.mp4" type="video/mp4">
+    Tu navegador no soporta el video de fondo.
+  </video>
+
+  <!-- Menú reproductor -->
+  <div id="playerMenu">
+    <div class="arrow left" onclick="prevRadio()"></div>
+    <img id="radioLogo" src="" alt="Logo radio" />
+    <div class="arrow right" onclick="nextRadio()"></div>
+  </div>
+
+  <!-- Audio único -->
+  <audio id="radioPlayer" autoplay loop></audio>
+
+  <script>
+    const radios = [
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/4/4b/PlaybackFM.JPG", 
+        url: "radios/gtasa/playbackfm.mp3" 
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/f/fa/KRose.JPG", 
+        url: "radios/gtasa/krose.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/c/c4/KDSTLogo.png",
+        url: "radios/gtasa/kdst.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/5/59/BounceFM.JPG", 
+        url: "radios/gtasa/bouncefm.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/f/f1/SF-UR.png",
+        url: "radios/gtasa/sf-ur.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/2/2d/RadioLosSantos.JPG", 
+        url: "radios/gtasa/radiolos.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/2/2e/Radio_X.JPG", 
+        url: "radios/gtasa/radiox.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/b/b3/CSR_103.9.jpg",
+        url: "radios/gtasa/csr.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/b/b9/KJahwest.JPG", 
+        url: "radios/gtasa/kjahwest.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/4/4d/MasterSoundsLogo.png",
+        url: "radios/gtasa/mastersounds.mp3"
+      },
+      {
+        logo: "https://static.wikia.nocookie.net/esgta/images/f/ff/West_Coast_Talk_Radio.jpg",
+        url: "radios/gtasa/wctrc.mp3"
+      }
+    ];
+
+    const audio = document.getElementById("radioPlayer");
+    const logoImg = document.getElementById("radioLogo");
+    let currentRadio = 0;
+    let interacted = false;
+    const appStartTime = Date.now();
+
+    // Tiempo de inicio aleatorio para cada radio
+    const randomOffsets = radios.map(() => Math.floor(Math.random() * 600)); // entre 0 y 10 min
+
+    function ensurePlay() {
+      if (!interacted) {
+        interacted = true;
+        playCurrentRadio();
+      }
+    }
+
+    function getCurrentOffset(index) {
+      const elapsed = Math.floor((Date.now() - appStartTime) / 1000);
+      return (randomOffsets[index] + elapsed) % 7200; // ciclo de hasta 2 horas
+    }
+
+    function playCurrentRadio() {
+      const radio = radios[currentRadio];
+      logoImg.src = radio.logo;
+      audio.src = radio.url;
+      audio.load();
+
+      audio.addEventListener("loadedmetadata", () => {
+        const time = getCurrentOffset(currentRadio);
+        if (time < audio.duration) {
+          audio.currentTime = time;
+        }
+        audio.play().catch(() => {});
+      }, { once: true });
+    }
+
+    function nextRadio() {
+      ensurePlay();
+      currentRadio = (currentRadio + 1) % radios.length;
+      playCurrentRadio();
+    }
+
+    function prevRadio() {
+      ensurePlay();
+      currentRadio = (currentRadio - 1 + radios.length) % radios.length;
+      playCurrentRadio();
+    }
+
+    // Mostrar logo inicial
+    logoImg.src = radios[currentRadio].logo;
+  </script>
+</body>
+</html>
