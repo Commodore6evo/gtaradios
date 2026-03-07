@@ -1,26 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GTA Radio</title>
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/main.css" />
 </head>
-<body onclick="ensurePlay()">
-  <video id="bgVideo" autoplay loop muted>
-    <source src="video.mp4" type="video/mp4">
-    Tu navegador no soporta el video de fondo.
-  </video>
 
-  <div id="playerMenu">
-    <div class="arrow left" onclick="prevRadio()"></div>
-    <img id="radioLogo" src="" alt="Logo radio" />
-    <div class="arrow right" onclick="nextRadio()"></div>
+<body onclick="ensurePlay()">
+
+  <div id="city-frame">
+    <img id="menu-bg" src="radios/gtasa/background/back1-BYEIqH3u.png" alt="City View" />
   </div>
 
-  <audio id="radioPlayer" autoplay loop></audio>
+  <div class="menu-container">
+    <header class="gta-header">
+      <div class="header-main">Audio</div>
+    </header>
 
+    <div class="settings-container">
+      <div class="setting-row">
+        <span class="label">RADIO</span>
+        <div class="volume-bar" id="radio-volume">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="label">SFX</span>
+        <div class="volume-bar" id="sfx-volume">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="label">RADIO EQ</span>
+        <span class="value">ON</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">RADIO AUTO-TUNE</span>
+        <span class="value">ON</span>
+      </div>
+    </div>
+
+    <div class="section-divider active">
+      <span class="icon-star">✥</span>
+      <span class="label">USER TRACK OPTIONS</span>
+    </div>
+
+    <div class="setting-row">
+      <span class="label">RADIO STATION</span>
+      <span class="value" id="radioName">PLAYBACK FM</span>
+    </div>
+
+    <div id="radio-gallery">
+      <!-- Los logos se inyectarán aquí -->
+    </div>
+
+    <footer class="footer-menu">
+      <div class="footer-btn">RESTORE DEFAULTS</div>
+      <div class="footer-btn">BACK</div>
+    </footer>
+  </div>
+
+  <div class="footer-help">CLICK LMB / RETURN - ENTER MENU</div>
+
+  <audio id="radioPlayer" loop></audio>
   <script src="scripts/main.js"></script>
 </body>
+
 </html>
